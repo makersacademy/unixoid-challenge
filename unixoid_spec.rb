@@ -37,4 +37,12 @@ describe "Unixoid test" do
     expect(File.read("#{Dir.home}/.bash_profile")).to match(/export\s+TESTING_MAKERS=working/)
   end
 
+  it "should have the count of env vars in my/public/files/t-vars.count" do
+    expect(File.read('my/public/files/t-vars.count')).to match(/^Overall count:\s+\d+\s*$/)
+  end
+
+  it "should have the count of text files in my/public/files/text-files-count.txt" do
+    expect(File.read('my/public/files/text-files-count.txt')).to match(/^\s*\d{2,4}\s*$/)
+  end
+
 end
