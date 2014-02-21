@@ -20,4 +20,21 @@ describe "Unixoid test" do
     expect(File.exist?('my/public/files/text-files-count.txt')).to be_true
   end
 
+  it "should have rw permissions for all users on my/public/files/t-vars.count" do
+    t_vars_permissions = File.stat('my/public/files/t-vars.count').mode    
+    expect(t_vars_permissions & 0666).to eq(0666)    
+  end
+
+  it "should have the list of env vars that begin with T in t-vars.env" do
+    lines = File.readlines('my/private/files/t-vars.env')
+    expect(lines.shift).to match(/^List of env vars that begin with T$/)
+    expect(lines.shift).to eq("\n")
+    expect(lines.map{|l| l[0]}.uniq).to eq(['T'])
+  end
+
+  it "should have the TESTING_MAKERS env variable set up" do
+    expect(ENV["TESTING_MAKERS"]).to eq('working')
+    expect(File.read("#{Dir.home}/.bash_profile")).to match(/export\s+TESTING_MAKERS=working/)
+  end
+
 end
