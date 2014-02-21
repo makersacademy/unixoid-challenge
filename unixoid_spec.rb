@@ -27,8 +27,7 @@ describe "Unixoid test" do
 
   it "should have the list of env vars that begin with T in t-vars.env" do
     lines = File.readlines('my/private/files/t-vars.env')
-    expect(lines.shift).to match(/^List of env vars that begin with T$/)
-    expect(lines.shift).to eq("\n")
+    expect(lines.shift).to match(/^List of env vars that begin with T$/)    
     expect(lines.map{|l| l[0]}.uniq).to eq(['T'])
   end
 
