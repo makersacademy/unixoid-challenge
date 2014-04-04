@@ -42,7 +42,7 @@ describe "Unixoid test" do
   end
 
   it "should have the count of text files in my/public/files/text-files-count.txt" do
-    expect(File.read('my/public/files/text-files-count.txt')).to match(/^\s*\d{2,4}\s*$/)
+    expect(File.read('my/public/files/text-files-count.txt')).to match(/^\s*\d{2,6}\s*$/)
   end
 
 end
