@@ -1,11 +1,9 @@
-require 'byebug'
-
 class UnixoidChallenge
   def self.run
     puts "Running the Unixoid Challenge Assessor ..."
     File.write 'unixoid_spec.rb', File.readlines(File.join(File.dirname(__FILE__), '..','spec','unixoid_spec.rb')).join
     `rspec unixoid_spec.rb > unixoid_results.txt`
-    puts 'Please enter your github user name'
+    puts 'Please enter your github user name:'
     username = gets.chomp
     curl = %Q{curl -u #{username} https://api.github.com/user/repos -d '{"name":"unixoid_submission"}'}
     %x[#{curl}]

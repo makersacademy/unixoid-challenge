@@ -1,0 +1,147 @@
+
+Unixoid test
+  1. should have a my/private/files directory (FAILED - 1)
+  2. should have a my/public/files directory (FAILED - 2)
+  3. should have a my/private/files/t-vars.env file (FAILED - 3)
+  4. should have 'List of env vars that begin with T' on first line of t-vars.env (FAILED - 4)
+  5. should have the list of env vars that begin with T in t-vars.env (FAILED - 5)
+  6. should have the TESTING_MAKERS env variable set up
+  7. should have the TESTING_MAKERS env set to be created for new terminal windows
+  8a. should have t-vars.count in my/public/files (FAILED - 6)
+  8b. should have the count of env vars in my/public/files/t-vars.count (FAILED - 7)
+  9. should have rw access for the owner only on my/private/files/t-vars.env (FAILED - 8)
+  10. should only allow the owner to change into my/private/files (FAILED - 9)
+  11. should have rw permissions for all users on my/public/files/t-vars.count (FAILED - 10)
+  12a. should have text-files-count.txt in my/public/files (FAILED - 11)
+  12b. should have the count of text files in my/public/files/text-files-count.txt (FAILED - 12)
+  13a. should have first-three-env.txt in my/private/files (FAILED - 13)
+  13b. should have the the first three env vars in my/private/files/first-three-env.txt (FAILED - 14)
+  14. should have commands.txt in my/private/files (FAILED - 15)
+
+Failures:
+
+  1) Unixoid test 1. should have a my/private/files directory
+     Failure/Error: expect(File.exist?('my/private/files')).to be true
+       
+       expected true
+            got false
+     # ./unixoid_spec.rb:4:in `block (2 levels) in <top (required)>'
+
+  2) Unixoid test 2. should have a my/public/files directory
+     Failure/Error: expect(File.exist?('my/public/files')).to be true
+       
+       expected true
+            got false
+     # ./unixoid_spec.rb:8:in `block (2 levels) in <top (required)>'
+
+  3) Unixoid test 3. should have a my/private/files/t-vars.env file
+     Failure/Error: expect(File.exist?('my/private/files/t-vars.env')).to be true
+       
+       expected true
+            got false
+     # ./unixoid_spec.rb:12:in `block (2 levels) in <top (required)>'
+
+  4) Unixoid test 4. should have 'List of env vars that begin with T' on first line of t-vars.env
+     Failure/Error: lines = File.readlines('my/private/files/t-vars.env')
+     Errno::ENOENT:
+       No such file or directory @ rb_sysopen - my/private/files/t-vars.env
+     # ./unixoid_spec.rb:16:in `readlines'
+     # ./unixoid_spec.rb:16:in `block (2 levels) in <top (required)>'
+
+  5) Unixoid test 5. should have the list of env vars that begin with T in t-vars.env
+     Failure/Error: lines = File.readlines('my/private/files/t-vars.env')
+     Errno::ENOENT:
+       No such file or directory @ rb_sysopen - my/private/files/t-vars.env
+     # ./unixoid_spec.rb:21:in `readlines'
+     # ./unixoid_spec.rb:21:in `block (2 levels) in <top (required)>'
+
+  6) Unixoid test 8a. should have t-vars.count in my/public/files
+     Failure/Error: expect(File.exist?('my/public/files/t-vars.count')).to be true
+       
+       expected true
+            got false
+     # ./unixoid_spec.rb:36:in `block (2 levels) in <top (required)>'
+
+  7) Unixoid test 8b. should have the count of env vars in my/public/files/t-vars.count
+     Failure/Error: expect(File.read('my/public/files/t-vars.count')).to match(/^Overall count:\s+\d+\s*$/i)
+     Errno::ENOENT:
+       No such file or directory @ rb_sysopen - my/public/files/t-vars.count
+     # ./unixoid_spec.rb:41:in `read'
+     # ./unixoid_spec.rb:41:in `block (2 levels) in <top (required)>'
+
+  8) Unixoid test 9. should have rw access for the owner only on my/private/files/t-vars.env
+     Failure/Error: permissions = File.stat(file).mode
+     Errno::ENOENT:
+       No such file or directory @ rb_file_s_stat - my/private/files/t-vars.env
+     # ./unixoid_spec.rb:46:in `stat'
+     # ./unixoid_spec.rb:46:in `block (2 levels) in <top (required)>'
+
+  9) Unixoid test 10. should only allow the owner to change into my/private/files
+     Failure/Error: permissions = File.stat(folder).mode
+     Errno::ENOENT:
+       No such file or directory @ rb_file_s_stat - my/private/files
+     # ./unixoid_spec.rb:52:in `stat'
+     # ./unixoid_spec.rb:52:in `block (2 levels) in <top (required)>'
+
+  10) Unixoid test 11. should have rw permissions for all users on my/public/files/t-vars.count
+     Failure/Error: t_vars_permissions = File.stat('my/public/files/t-vars.count').mode
+     Errno::ENOENT:
+       No such file or directory @ rb_file_s_stat - my/public/files/t-vars.count
+     # ./unixoid_spec.rb:59:in `stat'
+     # ./unixoid_spec.rb:59:in `block (2 levels) in <top (required)>'
+
+  11) Unixoid test 12a. should have text-files-count.txt in my/public/files
+     Failure/Error: expect(File.exist?('my/public/files/text-files-count.txt')).to be true
+       
+       expected true
+            got false
+     # ./unixoid_spec.rb:64:in `block (2 levels) in <top (required)>'
+
+  12) Unixoid test 12b. should have the count of text files in my/public/files/text-files-count.txt
+     Failure/Error: expect(File.read('my/public/files/text-files-count.txt')).to match(/^\s*\d{2,6}\s*$/)
+     Errno::ENOENT:
+       No such file or directory @ rb_sysopen - my/public/files/text-files-count.txt
+     # ./unixoid_spec.rb:68:in `read'
+     # ./unixoid_spec.rb:68:in `block (2 levels) in <top (required)>'
+
+  13) Unixoid test 13a. should have first-three-env.txt in my/private/files
+     Failure/Error: expect(File.exist?('my/private/files/first-three-env.txt')).to be true
+       
+       expected true
+            got false
+     # ./unixoid_spec.rb:72:in `block (2 levels) in <top (required)>'
+
+  14) Unixoid test 13b. should have the the first three env vars in my/private/files/first-three-env.txt
+     Failure/Error: lines = File.readlines('my/private/files/first-three-env.txt')
+     Errno::ENOENT:
+       No such file or directory @ rb_sysopen - my/private/files/first-three-env.txt
+     # ./unixoid_spec.rb:76:in `readlines'
+     # ./unixoid_spec.rb:76:in `block (2 levels) in <top (required)>'
+
+  15) Unixoid test 14. should have commands.txt in my/private/files
+     Failure/Error: expect(File.exist?('my/private/files/commands.txt')).to be true
+       
+       expected true
+            got false
+     # ./unixoid_spec.rb:82:in `block (2 levels) in <top (required)>'
+
+Finished in 0.00519 seconds (files took 0.12735 seconds to load)
+17 examples, 15 failures
+
+Failed examples:
+
+rspec ./unixoid_spec.rb:3 # Unixoid test 1. should have a my/private/files directory
+rspec ./unixoid_spec.rb:7 # Unixoid test 2. should have a my/public/files directory
+rspec ./unixoid_spec.rb:11 # Unixoid test 3. should have a my/private/files/t-vars.env file
+rspec ./unixoid_spec.rb:15 # Unixoid test 4. should have 'List of env vars that begin with T' on first line of t-vars.env
+rspec ./unixoid_spec.rb:20 # Unixoid test 5. should have the list of env vars that begin with T in t-vars.env
+rspec ./unixoid_spec.rb:35 # Unixoid test 8a. should have t-vars.count in my/public/files
+rspec ./unixoid_spec.rb:40 # Unixoid test 8b. should have the count of env vars in my/public/files/t-vars.count
+rspec ./unixoid_spec.rb:44 # Unixoid test 9. should have rw access for the owner only on my/private/files/t-vars.env
+rspec ./unixoid_spec.rb:50 # Unixoid test 10. should only allow the owner to change into my/private/files
+rspec ./unixoid_spec.rb:58 # Unixoid test 11. should have rw permissions for all users on my/public/files/t-vars.count
+rspec ./unixoid_spec.rb:63 # Unixoid test 12a. should have text-files-count.txt in my/public/files
+rspec ./unixoid_spec.rb:67 # Unixoid test 12b. should have the count of text files in my/public/files/text-files-count.txt
+rspec ./unixoid_spec.rb:71 # Unixoid test 13a. should have first-three-env.txt in my/private/files
+rspec ./unixoid_spec.rb:75 # Unixoid test 13b. should have the the first three env vars in my/private/files/first-three-env.txt
+rspec ./unixoid_spec.rb:81 # Unixoid test 14. should have commands.txt in my/private/files

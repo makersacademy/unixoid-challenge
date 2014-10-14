@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
     lib/unixoid_challenge.rb
     spec/unixoid_spec.rb
   ]
+  s.add_dependency('rspec', [">= 3"])
   s.homepage    =
     'http://makersacademy.com'
 
