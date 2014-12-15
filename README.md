@@ -13,7 +13,19 @@ Instructions
 Tasks:
 ------
 
-First navigate on the command line to your Desktop directory
+First navigate on the command line to your Desktop directory, and then create a temporary directory using the following command:
+
+```sh
+mkdir temp
+```
+
+Then change into that directory using this next command
+
+```sh
+cd temp
+```
+
+Now use your command line skills to complete the following:
 
 1. Using one command, create a directory structure "my/private/files" 
 2. Using one command, create a directory structure "my/public/files"
