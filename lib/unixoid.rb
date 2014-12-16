@@ -4,8 +4,8 @@ require 'unixoid/challenge'
 module Unixoid
 
   def self.run
-    Challenge.new.run_specs
-      # Rspec.run_tests
+    puts Challenge.new.run_specs
+    # Rspec.run_tests
       # Github.create_repo
       # Git.create_local_repo
       # Git.push_to_github

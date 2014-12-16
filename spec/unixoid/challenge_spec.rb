@@ -7,9 +7,10 @@ module Unixoid
     
     before do
       allow(File).to receive(:join).and_return('challenge.rb')
+      allow(Runner).to receive(:run)
     end
 
-    describe 'run_specs' do
+    describe 'Run specs' do
 
       let(:command) { 'rspec challenge.rb > unixoid_results.txt' }
 
@@ -20,8 +21,10 @@ module Unixoid
 
       context 'given a fully correct challenge' do
 
+        let(:message) { "Congratulations, you have completed the unixoid challenge" }
+
         it 'indicates a successful result' do
-          #expect(subject.run_spec).to eq("Successful result")
+          expect(subject.run_specs).to eq(message)
         end
       end
     end

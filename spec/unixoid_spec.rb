@@ -2,8 +2,6 @@ require 'unixoid'
 
 describe Unixoid do
 
-  subject { Unixoid.new }
-
   describe 'Running the entire challenge' do
 
     let(:challenge) { instance_spy('Challenge') }
@@ -13,8 +11,14 @@ describe Unixoid do
     end
 
     it 'runs the spec file' do
+      allow($stdout).to receive(:puts)
       Unixoid.run
       expect(challenge).to have_received(:run_specs)
+    end
+
+    it 'prints beginner friendly messages' do
+      allow(challenge).to receive(:run_specs).and_return("Checking your work")
+      expect { Unixoid.run }.to output(/Checking your work/).to_stdout
     end
   end
 
