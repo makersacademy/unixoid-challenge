@@ -5,6 +5,10 @@ module Unixoid
     def run(command)
       Kernel.system(command)
     end
+
+    def self.run(command)
+      Runner.new.run(command)
+    end    
   end
 
 end

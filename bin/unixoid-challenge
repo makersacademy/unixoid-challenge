@@ -3,6 +3,5 @@
 require 'rubygems'
 require 'rspec'
 require 'unixoid'
-raise "spell"
 
 Unixoid.run

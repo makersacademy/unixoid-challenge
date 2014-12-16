@@ -12,7 +12,5 @@ module Unixoid
       expect(Kernel).to receive(:system).with(command)
       subject.run(command)
     end
-
   end
-
 end
