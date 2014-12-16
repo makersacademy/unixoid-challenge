@@ -4,23 +4,31 @@ describe Unixoid do
 
   describe 'Running the entire challenge' do
 
-    let(:challenge) { instance_spy('Challenge') }
+    let!(:challenge) { class_spy('Unixoid::Challenge').as_stubbed_const }
 
-    before do
-      allow(Unixoid::Challenge).to receive(:new).and_return(challenge)
-    end
+    context 'running commands' do
 
-    it 'runs the spec file' do
-      allow($stdout).to receive(:puts)
-      Unixoid.run
-      expect(challenge).to have_received(:run_specs)
+      before do
+        allow($stdout).to receive(:puts)
+        Unixoid.run
+      end
+
+      it 'runs the spec file' do
+        expect(challenge).to have_received(:run_specs)
+      end
+
+      it 'creates a repo on Github' do
+        
+      end
     end
 
     it 'prints beginner friendly messages' do
       allow(challenge).to receive(:run_specs).and_return("Checking your work")
       expect { Unixoid.run }.to output(/Checking your work/).to_stdout
     end
+
   end
+
 
   # context 'Creating GitHub repo' do
   #

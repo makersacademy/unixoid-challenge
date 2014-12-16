@@ -28,5 +28,10 @@ module Unixoid
         end
       end
     end
+
+    describe 'Log in to Github' do
+      
+
+    end
   end
 end
