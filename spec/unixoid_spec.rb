@@ -6,7 +6,7 @@ describe Unixoid do
 
     let!(:challenge) { class_spy('Unixoid::Challenge').as_stubbed_const }
 
-    context 'running commands' do
+    context 'when running commands' do
 
       before do
         allow($stdout).to receive(:puts)

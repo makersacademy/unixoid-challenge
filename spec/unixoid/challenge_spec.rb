@@ -1,6 +1,7 @@
 require 'unixoid/challenge'
 
 module Unixoid
+
   describe Challenge do
 
     subject { Challenge.new }
@@ -10,7 +11,7 @@ module Unixoid
       allow(Runner).to receive(:run)
     end
 
-    describe 'Run specs' do
+    describe 'Running specs' do
 
       let(:command) { 'rspec challenge.rb > unixoid_results.txt' }
 
