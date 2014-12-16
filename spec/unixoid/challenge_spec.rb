@@ -3,15 +3,18 @@ require 'unixoid/challenge'
 module Unixoid
   describe Challenge do
 
-    subject { Unixoid::Challenge.new }
+    subject { Challenge.new }
     
     before do
       allow(File).to receive(:join).and_return('challenge.rb')
     end
 
     describe 'run_specs' do
-      it 'runs the challenge spec' do
-        expect(Unixoid::Runner).to receive(:run).with('rspec challenge.rb')
+
+      let(:command) { 'rspec challenge.rb > unixoid_results.txt' }
+
+      it 'runs the challenge spec and outputs to a file' do
+        expect(Runner).to receive(:run).with(command)
         subject.run_specs
       end
 

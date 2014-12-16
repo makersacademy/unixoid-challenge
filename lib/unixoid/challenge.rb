@@ -2,7 +2,7 @@ module Unixoid
   class Challenge
 
     def run_specs
-      Runner.run("rspec #{spec_file}")
+      Runner.run("rspec #{spec_file} > unixoid_results.txt")
     end
 
     private
