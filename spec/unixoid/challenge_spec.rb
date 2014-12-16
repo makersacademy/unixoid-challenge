@@ -3,11 +3,15 @@ require 'unixoid/challenge'
 module Unixoid
   describe Challenge do
 
-    subject { Unixoid::Challenge }
+    subject { Unixoid::Challenge.new }
+    
+    before do
+      allow(File).to receive(:join).and_return('challenge.rb')
+    end
 
     describe 'run_specs' do
       it 'runs the challenge spec' do
-        expect(Unixoid::Runner).to receive(:run).with('rspec challenge_spec.rb')
+        expect(Unixoid::Runner).to receive(:run).with('rspec challenge.rb')
         subject.run_specs
       end
 
