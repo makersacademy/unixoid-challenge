@@ -32,23 +32,32 @@ module Unixoid
         expect($stdin).to have_received(:gets)
       end
 
+      it 'stores the username' do
+        subject.create_repo
+        expect(subject.username).to eq('spike01')
+      end
+
+      it 'is chainable' do
+        expect(subject.create_repo).to eq(subject)
+      end
+
       it 'creates a repo on Github' do
         subject.create_repo
         expect(runner).to have_received(:run).with(command)
       end
 
-      def suppress_output
-        allow($stdout).to receive(:puts)
-      end
-
-      def mock_gets
-        $stdin = stdin
-        allow(stdin).to receive(:gets).and_return('spike01')
-      end
-
       after do
         $stdin = STDIN
       end
+    end
+
+    def suppress_output
+      allow($stdout).to receive(:puts)
+    end
+
+    def mock_gets
+      $stdin = stdin
+      allow(stdin).to receive(:gets).and_return('spike01')
     end
   end
 end

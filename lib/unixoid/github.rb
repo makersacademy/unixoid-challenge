@@ -16,12 +16,11 @@ module Unixoid
     def create_repo
       puts "Please enter your Github username:"
       @runner.run(%Q{curl -u #{username} #{GITHUB_URL} -d '{"name": #{REPO_NAME}}'})
+      self
     end
 
-    private
-
     def username
-      $stdin.gets.chomp
+      @username ||= $stdin.gets.chomp
     end
   end
 end
