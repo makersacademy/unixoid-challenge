@@ -5,6 +5,7 @@ describe Unixoid do
   describe 'Running the entire challenge' do
 
     let!(:challenge) { class_spy('Unixoid::Challenge').as_stubbed_const }
+    let!(:github) { class_spy('Unixoid::Github').as_stubbed_const }
 
     context 'when running commands' do
 
@@ -18,7 +19,7 @@ describe Unixoid do
       end
 
       it 'creates a repo on Github' do
-        
+        expect(github).to have_received(:create_repo)
       end
     end
 
