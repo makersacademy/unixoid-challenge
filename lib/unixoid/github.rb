@@ -1,3 +1,5 @@
+require 'io/console'
+
 module Unixoid
 
   class Github
@@ -14,7 +16,7 @@ module Unixoid
     end
 
     def create_repo
-      @runner.run(%Q{curl -u #{username}:#{password} #{GITHUB_URL} -d '{"name": "#{REPO_NAME}"}'})
+      @runner.run(%Q{curl -u "#{username}:#{password}" #{GITHUB_URL} -d '{"name": "#{REPO_NAME}"}'})
       self
     end
 

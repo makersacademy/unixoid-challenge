@@ -24,5 +24,6 @@ module Unixoid
     it 'captures errors' do
       expect(subject.run(error_command)).to be_truthy 
     end
+
   end
 end

@@ -1,4 +1,5 @@
 require 'forwardable'
+require 'uri'
 
 module Unixoid
 
@@ -7,7 +8,6 @@ module Unixoid
     extend Forwardable
 
     delegate run: :@runner
-    delegate [:username, :password] => :@github 
     
     def initialize(github)
       @github = github
@@ -39,11 +39,21 @@ module Unixoid
     end
 
     def add_remote
-      run("git remote add origin https://#{username}:#{password}@github.com:spike01/unixoid_submission.git")
+      run("git remote add origin https://#{username}:#{password}@github.com/#{username}/unixoid_submission.git")
     end
 
     def push_results
       run('git push --force -u origin master')
+    end
+
+    private
+
+    def username
+      URI.encode(@github.username)
+    end
+
+    def password
+      URI.encode(@github.password)
     end
   end
 end

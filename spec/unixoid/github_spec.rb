@@ -13,7 +13,7 @@ module Unixoid
 
       let(:message) { "Please enter your Github username:\n" }
 
-      let(:command) { %Q{curl -u spike01:pass #{github_command}} }
+      let(:command) { %Q{curl -u "spike01:pass" #{github_command}} }
       let(:url) { Github::GITHUB_URL }
       let(:repo) { Github::REPO_NAME }
       let(:github_command) { %Q{#{url} -d '{"name": "#{repo}"}'} }

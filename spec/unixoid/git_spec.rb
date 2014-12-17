@@ -4,7 +4,8 @@ module Unixoid
 
   describe Git do
 
-    let(:github) { double 'github', username: 'spike01', password: 'pass' }
+    let(:github) { double 'github', username: 'spike01', password: password }
+    let(:password) { 'pass' }
 
     subject { Git.new(github) }
 
@@ -13,7 +14,7 @@ module Unixoid
     let(:create_command) { 'git init' }
     let(:add_command) { 'git add unixoid_results.txt' }
     let(:commit_command) { "git commit -m 'Unixoid submission'" }
-    let(:remote_command) { "git remote add origin https://spike01:pass@github.com:spike01/unixoid_submission.git" }
+    let(:remote_command) { "git remote add origin https://spike01:pass@github.com/spike01/unixoid_submission.git" }
     let(:push_command) { 'git push --force -u origin master' }
 
     context 'running commands' do
@@ -38,6 +39,17 @@ module Unixoid
         expect(runner).to have_received(:run).with(remote_command)
       end
 
+      context 'when adding a remote and a user enters input with special characters' do
+
+        let(:remote_command) { "git remote add origin https://spike01:pass%20word@github.com/spike01/unixoid_submission.git" }
+        let(:password) { 'pass word' }
+
+        it 'URI encodes the user credentials' do
+          subject.add_remote
+          expect(runner).to have_received(:run).with(remote_command)
+        end
+
+      end
       it 'force pushes results file' do
         subject.push_results
         expect(runner).to have_received(:run).with(push_command)

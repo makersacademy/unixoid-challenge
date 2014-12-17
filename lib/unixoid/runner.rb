@@ -9,12 +9,18 @@ module Unixoid
     end    
 
     def run(command)
-      line = Cocaine::CommandLine.new(command, "", swallow_stderr: true)
+      line = Cocaine::CommandLine.new(command, "", swallow_stderr: swallow_stderr?)
       begin
-         line.run
+        line.run
       rescue Cocaine::ExitStatusError => e
-         e.message
+        e.message
       end
+    end
+
+    private
+
+    def swallow_stderr?
+      ENV['SWALLOW_ERRORS'] != 'true' 
     end
   end
 end
