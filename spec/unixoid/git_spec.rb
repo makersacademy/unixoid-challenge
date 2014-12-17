@@ -11,7 +11,7 @@ module Unixoid
     let!(:runner) { class_spy('Unixoid::Runner').as_stubbed_const }
 
     let(:create_command) { 'git init' }
-    let(:add_command) { 'git add challenge_results.txt' }
+    let(:add_command) { 'git add unixoid_results.txt' }
     let(:commit_command) { "git commit -m 'Unixoid submission'" }
     let(:remote_command) { "git remote add origin git@github.com:spike01/unixoid_submission.git" }
     let(:push_command) { 'git push -u origin master' }

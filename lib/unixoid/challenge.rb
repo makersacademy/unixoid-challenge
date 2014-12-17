@@ -6,7 +6,7 @@ module Unixoid
     end
 
     def run_specs
-      Runner.run("rspec --out unixoid_results.txt -fp challenge.rb")
+      Runner.run("rspec --out unixoid_results.txt -fp #{spec_file}")
       "Congratulations, you have completed the unixoid challenge"
     end
 

@@ -32,7 +32,7 @@ module Unixoid
     end
 
     def add_results
-      run('git add challenge_results.txt')
+      run('git add unixoid_results.txt')
     end
 
     def commit_results

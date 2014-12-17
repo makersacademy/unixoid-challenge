@@ -16,7 +16,7 @@ module Unixoid
       let(:command) { %Q{curl -u spike01 #{github_command}} }
       let(:url) { Github::GITHUB_URL }
       let(:repo) { Github::REPO_NAME }
-      let(:github_command) { %Q{#{url} -d '{"name": #{repo}}'} }
+      let(:github_command) { %Q{#{url} -d '{"name": "#{repo}"}'} }
 
       before do
         mock_gets

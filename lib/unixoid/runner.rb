@@ -9,7 +9,12 @@ module Unixoid
     end    
 
     def run(command)
-      Cocaine::CommandLine.new(command).run
+      line = Cocaine::CommandLine.new(command)
+      begin
+         line.run
+      rescue Cocaine::ExitStatusError => e
+         e.message
+      end
     end
   end
 end
