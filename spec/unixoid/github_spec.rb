@@ -13,7 +13,7 @@ module Unixoid
 
       let(:message) { "Please enter your Github username:\n" }
 
-      let(:command) { %Q{curl -u spike01 #{github_command}} }
+      let(:command) { %Q{curl -u spike01:pass #{github_command}} }
       let(:url) { Github::GITHUB_URL }
       let(:repo) { Github::REPO_NAME }
       let(:github_command) { %Q{#{url} -d '{"name": "#{repo}"}'} }
@@ -23,18 +23,16 @@ module Unixoid
         suppress_output
       end
 
-      it 'asks for a username' do
-        expect { subject.create_repo }.to output(message).to_stdout
-      end
+      context 'fetching user info' do
+        it "stores user's github username" do
+          subject.create_repo
+          expect(subject.username).to eq('spike01')
+        end
 
-      it 'takes the username' do
-        subject.create_repo
-        expect($stdin).to have_received(:gets)
-      end
-
-      it 'stores the username' do
-        subject.create_repo
-        expect(subject.username).to eq('spike01')
+        it "stores user's github password" do
+          subject.create_repo
+          expect(subject.password).to eq('pass')
+        end
       end
 
       it 'is chainable' do
@@ -58,6 +56,7 @@ module Unixoid
     def mock_gets
       $stdin = stdin
       allow(stdin).to receive(:gets).and_return('spike01')
+      allow(stdin).to receive(:noecho).and_return('pass')
     end
   end
 end

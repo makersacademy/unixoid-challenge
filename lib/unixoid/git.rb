@@ -7,16 +7,15 @@ module Unixoid
     extend Forwardable
 
     delegate run: :@runner
-
-    attr_reader :username
+    delegate [:username, :password] => :@github 
     
-    def initialize(username)
-      @username = username
+    def initialize(github)
+      @github = github
       @runner = Runner.new
     end
 
-    def self.submit(username)
-      new(username).submit
+    def self.submit(github)
+      new(github).submit
     end
 
     def submit
@@ -40,11 +39,11 @@ module Unixoid
     end
 
     def add_remote
-      run("git remote add origin git@github.com:#{username}/unixoid_submission.git")
+      run("git remote add origin https://#{username}:#{password}@github.com:spike01/unixoid_submission.git")
     end
 
     def push_results
-      run('git push -u origin master')
+      run('git push --force -u origin master')
     end
   end
 end

@@ -7,9 +7,7 @@ describe Unixoid do
     let!(:challenge) { class_spy('Unixoid::Challenge').as_stubbed_const }
     let!(:github) { class_spy('Unixoid::Github').as_stubbed_const }
     let!(:git) { class_spy('Unixoid::Git').as_stubbed_const }
-    let(:github_instance) { double("github", username: username) }
-
-    let(:username) { 'spike01' }
+    let(:github_instance) { double("github") }
 
     context 'when running commands' do
 
@@ -29,24 +27,8 @@ describe Unixoid do
       end
       
       it 'creates a local repo' do
-        expect(git).to have_received(:submit).with(username)
+        expect(git).to have_received(:submit).with(github_instance)
       end
     end
-
-    #it 'prints beginner friendly messages' do
-      #allow(challenge).to receive(:run_specs).and_return("Checking your work")
-      #expect { Unixoid.run }.to output(/Checking your work/).to_stdout
-    #end
-
   end
-
-
-  # context 'Creating GitHub repo' do
-  #
-  # end
-  #
-  # context 'Committing to GitHub' do
-  #
-  # end
-
 end

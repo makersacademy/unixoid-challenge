@@ -4,17 +4,17 @@ module Unixoid
 
   describe Git do
 
-    let(:username) { 'spike01' }
+    let(:github) { double 'github', username: 'spike01', password: 'pass' }
 
-    subject { Git.new(username) }
+    subject { Git.new(github) }
 
     let!(:runner) { class_spy('Unixoid::Runner').as_stubbed_const }
 
     let(:create_command) { 'git init' }
     let(:add_command) { 'git add unixoid_results.txt' }
     let(:commit_command) { "git commit -m 'Unixoid submission'" }
-    let(:remote_command) { "git remote add origin git@github.com:spike01/unixoid_submission.git" }
-    let(:push_command) { 'git push -u origin master' }
+    let(:remote_command) { "git remote add origin https://spike01:pass@github.com:spike01/unixoid_submission.git" }
+    let(:push_command) { 'git push --force -u origin master' }
 
     context 'running commands' do
 
@@ -38,7 +38,7 @@ module Unixoid
         expect(runner).to have_received(:run).with(remote_command)
       end
 
-      it 'pushes results file' do
+      it 'force pushes results file' do
         subject.push_results
         expect(runner).to have_received(:run).with(push_command)
       end
