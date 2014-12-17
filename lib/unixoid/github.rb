@@ -9,6 +9,10 @@ module Unixoid
       @runner = Runner.new
     end
 
+    def self.create_repo
+      new.create_repo
+    end
+
     def create_repo
       puts "Please enter your Github username:"
       @runner.run(%Q{curl -u #{username} #{GITHUB_URL} -d '{"name": #{REPO_NAME}}'})
