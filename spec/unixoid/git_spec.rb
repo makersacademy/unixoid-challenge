@@ -16,27 +16,28 @@ module Unixoid
     let(:commit_command) { "git commit -m 'Unixoid submission'" }
     let(:remote_command) { "git remote add origin https://spike01:pass@github.com/spike01/unixoid_submission.git" }
     let(:push_command) { 'git push --force -u origin master' }
+    let(:remove_command) { 'git remote rm origin' }
 
     context 'running commands' do
 
       it 'creates a local repo' do
         subject.create_repo
-        expect(runner).to have_received(:run).with(create_command)
+        expect_to_have_run(create_command)
       end
 
       it 'adds results file' do
         subject.add_results
-        expect(runner).to have_received(:run).with(add_command)
+        expect_to_have_run(add_command)
       end
 
       it 'commits changes' do
         subject.commit_results
-        expect(runner).to have_received(:run).with(commit_command)
+        expect_to_have_run(commit_command)
       end
 
       it 'adds remote' do
         subject.add_remote
-        expect(runner).to have_received(:run).with(remote_command)
+        expect_to_have_run(remote_command)
       end
 
       context 'when adding a remote and a user enters input with special characters' do
@@ -46,27 +47,37 @@ module Unixoid
 
         it 'URI encodes the user credentials' do
           subject.add_remote
-          expect(runner).to have_received(:run).with(remote_command)
+          expect_to_have_run(remote_command)
         end
 
       end
+
       it 'force pushes results file' do
         subject.push_results
-        expect(runner).to have_received(:run).with(push_command)
+        expect_to_have_run(push_command)
+      end
+
+      it 'removes the remote after push' do
+        subject.remove_remote
+        expect_to_have_run(remove_command)
       end
 
     end
 
     context 'submitting results' do
 
-      let(:commands) { [create_command, add_command, commit_command, remote_command, push_command] }
+      let(:commands) { [create_command, add_command, commit_command, remote_command, push_command, remove_command] }
 
       it 'adds, commits and pushes in one go' do
         subject.submit
         commands.each do |command| 
-          expect(runner).to have_received(:run).with(command)
+          expect_to_have_run(command)
         end
       end
+    end
+
+    def expect_to_have_run(command)
+      expect(runner).to have_received(:run).with(command)
     end
   end
 end

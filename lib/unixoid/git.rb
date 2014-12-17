@@ -24,6 +24,7 @@ module Unixoid
       commit_results
       add_remote
       push_results
+      remove_remote
     end
 
     def create_repo
@@ -44,6 +45,10 @@ module Unixoid
 
     def push_results
       run('git push --force -u origin master')
+    end
+
+    def remove_remote
+      run('git remote rm origin')
     end
 
     private
