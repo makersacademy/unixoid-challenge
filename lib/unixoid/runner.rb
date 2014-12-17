@@ -1,3 +1,5 @@
+require 'cocaine'
+
 module Unixoid
 
   class Runner
@@ -7,9 +9,7 @@ module Unixoid
     end    
 
     def run(command)
-      Kernel.system(command)
+      Cocaine::CommandLine.new(command).run
     end
-
   end
-
 end

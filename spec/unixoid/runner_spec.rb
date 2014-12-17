@@ -6,11 +6,14 @@ module Unixoid
 
     subject { Runner.new }
 
-    let(:command) { 'ls' }
+    let(:command) { 'echo hello world' }
 
     it 'runs a command' do
-      expect(Kernel).to receive(:system).with(command)
-      subject.run(command)
+      expect(subject.run(command)).to match(/hello world/)
+    end
+
+    it 'does not output anything to stdout' do
+      expect { subject.run(command) }.to_not output.to_stdout
     end
   end
 end

@@ -13,7 +13,7 @@ module Unixoid
 
     describe 'Running specs' do
 
-      let(:command) { 'rspec challenge.rb > unixoid_results.txt' }
+      let(:command) { 'rspec --out unixoid_results.txt -fp challenge.rb' }
 
       it 'runs the challenge spec and outputs to a file' do
         expect(Runner).to receive(:run).with(command)

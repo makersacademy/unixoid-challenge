@@ -8,6 +8,7 @@ Gem::Specification.new do |s|
   s.email       = 'sam@makersacademy.com'
   s.files       = Dir.glob("{bin,lib}/**/*") + %w(README.md)
   s.add_dependency('rspec', ["~> 3"])
+  s.add_dependency('cocaine')
   s.homepage    =
     'http://github.com/makersacademy/unixoid-challenge'
 
