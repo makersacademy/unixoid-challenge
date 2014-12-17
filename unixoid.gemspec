@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.description = "A gem to assess your performance on the unixoid challenge"
   s.authors     = ["Sam Joseph","Dan Le Dosquet-Bergquist", "Leo Allen", "Spike Lindsey"]
   s.email       = 'sam@makersacademy.com'
-  s.files       = Dir.glob("{bin,lib}/**/*") + %w(README.md)
+  s.files       = Dir.glob("{bin,lib}/**/*") + %w(README.md challenge_spec.rb)
   s.add_dependency('rspec', ["~> 3"])
   s.add_dependency('cocaine')
   s.homepage    =
