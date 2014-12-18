@@ -25,5 +25,24 @@ module Unixoid
       expect(subject.run(error_command)).to be_truthy 
     end
 
+    describe 'Logging' do
+
+      let(:logfile) { 'testlogfile.log' }
+
+      before do
+        stub_const('Unixoid::Runner::LOG_FILE', logfile)
+        File.unlink(logfile) if File.exists?(logfile)
+      end
+
+      it 'logs output to a file' do
+        subject.run(command)
+        expect(File.read(logfile)).to match(/hello world/)
+      end
+      
+      it 'logs errors' do
+        subject.run(error_command)
+        expect(File.read(logfile)).to match(/ERROR/)
+      end
+    end
   end
 end

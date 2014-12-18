@@ -1,8 +1,15 @@
 require 'cocaine'
+require 'logger'
 
 module Unixoid
 
   class Runner
+
+    LOG_FILE = 'logfile.log'
+
+    def initialize
+      @logger = Logger.new(LOG_FILE)
+    end
 
     def self.run(command)
       new.run(command)
@@ -11,11 +18,15 @@ module Unixoid
     def run(command)
       line = Cocaine::CommandLine.new(command, "", swallow_stderr: true)
       begin
-        line.run
+        log(:info, line.run)
       rescue Cocaine::ExitStatusError => e
-        raise "Is this thing on?" 
-        e.message
+        log(:error, e.message)
       end
+    end
+
+    def log(level, message)
+      @logger.send(level, message)
+      message
     end
   end
 end

@@ -20,19 +20,15 @@ module Unixoid
         subject.run_specs
       end
 
-      context 'given a fully correct challenge' do
+      #context 'given a fully correct challenge' do
 
-        let(:message) { "Congratulations, you have completed the unixoid challenge" }
+        #let(:message) { "Congratulations, you have completed the unixoid challenge" }
 
-        it 'indicates a successful result' do
-          expect(subject.run_specs).to eq(message)
-        end
-      end
-    end
+        #it 'indicates a successful result' do
+          #expect(subject.run_specs).to eq(message)
+        #end
+      #end
+    #end
 
-    describe 'Log in to Github' do
-      
-
-    end
   end
 end
