@@ -4,8 +4,6 @@ module Unixoid
 
   describe Runner do
 
-    subject { Runner.new }
-
     let(:command) { 'echo hello world' }
     let(:error_command) { 'rspec foo' }
 

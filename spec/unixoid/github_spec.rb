@@ -4,8 +4,6 @@ module Unixoid
 
   describe Github do
 
-    subject { Github.new }
-
     describe "Creating a remote repo" do
 
       let(:stdin) { spy('io') }
