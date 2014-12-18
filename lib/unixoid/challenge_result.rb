@@ -8,14 +8,14 @@ class ChallengeResult
     @result = parse(challenge)
   end
 
-  def self.status(challenge)
-    new(challenge).status
-  end
-
   def status 
     STATUSES.find do |status|
       send("#{status}?")
     end
+  end
+  
+  def failures
+    failing_test_numbers.compact
   end
 
   private
@@ -23,26 +23,37 @@ class ChallengeResult
   attr_reader :result
 
   def complete?
-    passed_tests.length == total_tests
+    passes.length == total_tests
   end
 
   def attempted?
-    passed_tests.any?
+    passes.any?
   end
 
   def unattempted?
-    passed_tests.empty?
+    passes.empty?
   end
   
   def parse(challenge)
     challenge.split("\n").first.chars
   end
 
-  def passed_tests
-    result.select { |test| test == PASS_CHAR } 
+  def passes
+    result.select { |test| passed(test) } 
+  end
+
+  def passed(test)
+    test == PASS_CHAR
   end
 
   def total_tests
     result.length
+  end
+
+  def failing_test_numbers
+    @result.map.with_index do |test, index|
+      next if passed(test)
+      index + 1
+    end
   end
 end

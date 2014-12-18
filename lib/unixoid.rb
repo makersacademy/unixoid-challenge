@@ -12,7 +12,7 @@ module Unixoid
     return auth_fail unless github.authenticated?
 
     challenge = Challenge.run_specs
-    results = ChallengeResult.status(challenge)
+    results = ChallengeResult.new(challenge)
 
     puts 'Checking and submitting...'
     Git.submit(github)
@@ -28,11 +28,17 @@ module Unixoid
   end
 
   def self.render_results(results)
-    case results
+    case results.status
     when :complete
       'Congratulations!'.green
     when :attempted
-      'Almost there! Feel free to try again and resubmit'
+      %{
+Almost there! Feel free to try again and re-submit
+
+The following answers need to be corrected:
+
+#{results.failures.join(", ")}
+      }
     when :unattempted
       'Looks like you have not tried the challenge. Give it a go and resubmit'.red
     end

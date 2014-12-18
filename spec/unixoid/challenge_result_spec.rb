@@ -16,10 +16,14 @@ describe ChallengeResult do
 
   context 'when some tests pass' do
 
-    let(:challenge) { "FFF.FFFF.F..FFFFF\n\nFailures" }
+    let(:challenge) { "FFF.FFFF.F\n\nFailures" }
 
     it 'indicates that the challenge was not completed' do
       expect(subject.status).to eq(:attempted)
+    end
+
+    it 'indicates which challenges have failed' do
+      expect(subject.failures).to eq([1, 2, 3, 5, 6, 7, 8, 10])
     end
   end
 
