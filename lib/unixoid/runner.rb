@@ -13,6 +13,7 @@ module Unixoid
       begin
         line.run
       rescue Cocaine::ExitStatusError => e
+        raise "Is this thing on?" 
         e.message
       end
     end
