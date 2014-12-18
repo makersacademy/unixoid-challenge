@@ -5,7 +5,7 @@ module Unixoid
   describe Challenge do
 
     subject { Challenge.new }
-    
+
     before do
       allow(File).to receive(:join).and_return('challenge_spec.rb')
       allow(Runner).to receive(:run)
@@ -19,16 +19,6 @@ module Unixoid
         expect(Runner).to receive(:run).with(command)
         subject.run_specs
       end
-
-      #context 'given a fully correct challenge' do
-
-        #let(:message) { "Congratulations, you have completed the unixoid challenge" }
-
-        #it 'indicates a successful result' do
-          #expect(subject.run_specs).to eq(message)
-        #end
-      #end
-    #end
-
+    end
   end
 end

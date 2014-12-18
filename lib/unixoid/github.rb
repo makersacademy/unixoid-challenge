@@ -1,4 +1,5 @@
 require 'io/console'
+require 'json'
 
 module Unixoid
 
@@ -16,7 +17,7 @@ module Unixoid
     end
 
     def create_repo
-      @runner.run(%Q{curl -u "#{username}:#{password}" #{GITHUB_URL} -d '{"name": "#{REPO_NAME}"}'})
+      parse @runner.run(command)
       self
     end
 
@@ -27,8 +28,26 @@ module Unixoid
     def password
       @password ||= ask_for_password
     end
+    
+    def authenticated?
+      @response && @response['message'] != "Bad credentials"
+    end
 
     private
+
+    def command
+      %Q{curl -u "#{username}:#{password}" #{GITHUB_URL} -d '{"name": "#{REPO_NAME}"}'}
+    end
+ 
+    def parse(response)
+      @response = parse_json(response)
+    end
+
+    def parse_json(response)
+      begin
+        JSON.parse(response)
+      rescue JSON::ParseError; end
+    end
 
     def ask_for_username
       puts "Please enter your Github username:"
