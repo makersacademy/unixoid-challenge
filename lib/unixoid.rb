@@ -2,6 +2,7 @@ require 'unixoid/runner'
 require 'unixoid/challenge'
 require 'unixoid/github'
 require 'unixoid/git'
+require 'unixoid/colorize'
 
 module Unixoid
 
@@ -15,6 +16,6 @@ module Unixoid
   end
 
   def self.auth_fail
-    puts "Incorrect login details. Please run unixoid-challenge again" 
+    puts "Incorrect login details. Please run unixoid-challenge again".red 
   end
 end
