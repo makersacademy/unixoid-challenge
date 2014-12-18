@@ -2,6 +2,6 @@
 
 require 'rubygems'
 require 'rspec'
-require 'unixoid_challenge'
+require 'unixoid'
 
-UnixoidChallenge.run
+Unixoid.run
