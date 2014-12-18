@@ -39,7 +39,7 @@ module Unixoid
       
       it 'logs errors' do
         subject.run(error_command)
-        expect(File.read(logfile)).to match(/ERROR/)
+        expect(File.read(logfile)).to match(/alksjdf/)
       end
     end
   end

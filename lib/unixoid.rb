@@ -38,7 +38,7 @@ Almost there! Feel free to try again and re-submit
 The following answers need to be corrected:
 
 #{results.failures.join(", ")}
-      }
+      }.yellow
     when :unattempted
       'Looks like you have not tried the challenge. Give it a go and resubmit'.red
     end
