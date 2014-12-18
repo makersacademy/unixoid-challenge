@@ -1,5 +1,0 @@
-# Logfile created on 2014-12-18 11:46:59 +0000 by logger.rb/44203
-E, [2014-12-18T11:46:59.769959 #21729] ERROR -- : Command 'rspec foo  2>/dev/null' returned 1. Expected 0
-Here is the command output:
-
-

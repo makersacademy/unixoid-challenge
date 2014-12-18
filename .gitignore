@@ -2,3 +2,4 @@
 unixoid_results.txt
 Gemfile.lock
 unixoid.sh
+*.log
