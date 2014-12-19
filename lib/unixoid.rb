@@ -8,17 +8,25 @@ require 'unixoid/challenge_result'
 module Unixoid
 
   def self.run
-    create_github_repos
-    final_result(run_challenge)
+    results = run_challange
+    final_result(results)
+    puts "Submitting your results to Makers Academy"
+    push_to_github('challenge_results.txt')
   end
 
+  def self.debug
+    puts "Submitting your history to Makers Academy so we can help you debug"
+    create_history_file
+    push_to_github('commands.txt')
+  end
   private
 
   class << self
-
-    def create_github_repos
+    
+    def push_to_github(file)
       github = Github.create_repo
       auth_fail! unless github.authenticated?
+      Git.submit(file, github)
     end
 
     def run_challenge
@@ -26,9 +34,8 @@ module Unixoid
       ChallengeResult.new(challenge)
     end
 
-    def check_and_submit
-      puts 'Checking and submitting...'
-      Git.submit(github)
+    def create_history_file
+      Runner.run('cp ~/.bash_history commands.txt')
     end
 
     def final_result(results)

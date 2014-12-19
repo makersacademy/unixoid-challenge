@@ -17,7 +17,8 @@ module Unixoid
     let(:remote_command) { "git remote add origin https://spike01:pass@github.com/spike01/unixoid_submission.git" }
     let(:push_command) { 'git push --force -u origin master' }
     let(:remove_command) { 'git remote rm origin' }
-
+    let(:file) { 'unixoid_results.txt' }
+    
     context 'running commands' do
 
       it 'creates a local repo' do
@@ -26,7 +27,7 @@ module Unixoid
       end
 
       it 'adds results file' do
-        subject.add_results
+        subject.add(file)
         expect_to_have_run(add_command)
       end
 
@@ -69,7 +70,7 @@ module Unixoid
       let(:commands) { [create_command, add_command, commit_command, remote_command, push_command, remove_command] }
 
       it 'adds, commits and pushes in one go' do
-        subject.submit
+        subject.submit(file)
         commands.each do |command| 
           expect_to_have_run(command)
         end

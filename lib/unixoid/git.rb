@@ -14,13 +14,13 @@ module Unixoid
       @runner = Runner.new
     end
 
-    def self.submit(github)
-      new(github).submit
+    def self.submit(file, github)
+      new(github).submit(file)
     end
 
-    def submit
+    def submit(file)
       create_repo
-      add_results
+      add(file)
       commit_results
       add_remote
       push_results
@@ -31,8 +31,8 @@ module Unixoid
       run('git init')      
     end
 
-    def add_results
-      run('git add unixoid_results.txt')
+    def add(file)
+      run("git add #{file}")
     end
 
     def commit_results
