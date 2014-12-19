@@ -3,4 +3,4 @@
 require 'rubygems'
 require 'unixoid'
 
-Unixoid.debug
+Unixoid::Controller.debug

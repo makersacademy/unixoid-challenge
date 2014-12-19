@@ -4,4 +4,4 @@ require 'rubygems'
 require 'rspec'
 require 'unixoid'
 
-Unixoid.run
+Unixoid::Controller.run
