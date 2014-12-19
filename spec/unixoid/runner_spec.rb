@@ -20,7 +20,16 @@ module Unixoid
     end
 
     it 'captures errors' do
-      expect(subject.run(error_command)).to be_truthy 
+      expect(subject.run(error_command)).to be_truthy
+    end
+
+    context 'given an expected outcode of 1' do
+      let(:opts) { { outcodes: [0, 1] } }
+      let(:error_message) { /returned 1\. Expected 0/ }
+
+      it 'does not return an error message as it is expected' do
+        expect(subject.run(error_command, opts)).to_not match(error_message)
+      end
     end
 
     describe 'Logging' do
@@ -36,10 +45,10 @@ module Unixoid
         subject.run(command)
         expect(File.read(logfile)).to match(/hello world/)
       end
-      
+
       it 'logs errors' do
         subject.run(error_command)
-        expect(File.read(logfile)).to match(/alksjdf/)
+        expect(File.read(logfile)).to match(/ERROR/)
       end
     end
   end

@@ -11,12 +11,12 @@ module Unixoid
       @logger = Logger.new(LOG_FILE)
     end
 
-    def self.run(command)
-      new.run(command)
+    def self.run(command, opts = {})
+      new.run(command, opts)
     end    
 
-    def run(command)
-      line = Cocaine::CommandLine.new(command, "", { expected_outcodes: [0, 1], swallow_stderr: true } )
+    def run(command, outcodes: [0])
+      line = Cocaine::CommandLine.new(command, "", expected_outcodes: outcodes, swallow_stderr: true)
       begin
         log(:info, line.run)
       rescue Cocaine::ExitStatusError => error
