@@ -10,12 +10,12 @@ module Unixoid
   def self.run
     results = run_challange
     final_result(results)
-    puts "Submitting your results to Makers Academy"
+    puts "Submitting your results to Makers Academy..."
     push_to_github('challenge_results.txt')
   end
 
   def self.debug
-    puts "Submitting your history to Makers Academy so we can help you debug"
+    puts "Submitting your history to Makers Academy so we can help you debug..."
     create_history_file
     push_to_github('commands.txt')
   end
@@ -27,6 +27,7 @@ module Unixoid
       github = Github.create_repo
       auth_fail! unless github.authenticated?
       Git.submit(file, github)
+      puts "Submitted!"
     end
 
     def run_challenge
@@ -40,7 +41,6 @@ module Unixoid
 
     def final_result(results)
       puts render_results(results)
-      puts 'Challenge Submitted!'
     end
 
     def auth_fail!
