@@ -8,10 +8,10 @@ require 'unixoid/challenge_result'
 module Unixoid
 
   def self.run
-    results = run_challange
+    results = run_challenge
     final_result(results)
     puts "Submitting your results to Makers Academy..."
-    push_to_github('challenge_results.txt')
+    push_to_github(Challenge::RESULTS_FILE)
   end
 
   def self.debug
@@ -19,6 +19,7 @@ module Unixoid
     create_history_file
     push_to_github('commands.txt')
   end
+  
   private
 
   class << self
@@ -26,6 +27,7 @@ module Unixoid
     def push_to_github(file)
       github = Github.create_repo
       auth_fail! unless github.authenticated?
+      puts "Submitting..."
       Git.submit(file, github)
       puts "Submitted!"
     end
@@ -51,18 +53,23 @@ module Unixoid
     def render_results(results)
       case results.status
       when :complete
-        'Congratulations!'.green
+        'Congratulations, you have successfully completed the Unixoid Challenge!'.green
       when :attempted
-        %{
+        attempted(results).yellow
+      when :unattempted
+        puts 'Looks like you have not tried the challenge. Give it a go and then re-submit'.red
+        exit 0
+      end
+    end
+
+    def attempted(results)
+      %{
 Almost there! Feel free to try again and re-submit
 
 The following answers need to be corrected:
 
           #{results.failures.join(", ")}
-        }.yellow
-      when :unattempted
-        'Looks like you have not tried the challenge. Give it a go and resubmit'.red
-      end
+      }
     end
   end
 end

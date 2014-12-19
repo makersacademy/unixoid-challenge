@@ -1,12 +1,14 @@
 module Unixoid
   class Challenge
+    
+    RESULTS_FILE = 'unixoid_results.txt'
 
     def self.run_specs
       new.run_specs
     end
 
     def run_specs
-      Runner.run("rspec --out unixoid_results.txt -fp #{spec_file}")
+      Runner.run("rspec --out #{RESULTS_FILE} -fp #{spec_file}")
     end
 
     private 
