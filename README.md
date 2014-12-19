@@ -45,10 +45,18 @@ Now use your command line skills to complete the following:
 Checking and submitting your progress
 -------------------------------------
 
+First, you will need to install the `unixoid-challenge` gem, like this:
+
+```sh
+gem install unixoid-challenge
+```
+
 At any point while going through the challenge you can check your progress by running:
 
 ```sh
 unixoid-challenge
 ```
+
+__(make sure you are in the same directory that you completed the challenge in)__
 
 This will tell you if you've completed the task, or which of the tasks above you still need to complete. It will also submit your results to GitHub (you'll need your username and password that you use to login to GitHub) so we can track your progress.
