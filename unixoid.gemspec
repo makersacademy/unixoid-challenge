@@ -16,5 +16,5 @@ Gem::Specification.new do |s|
   ## require 'NAME.rb' or'/lib/NAME/file.rb' can be as require 'NAME/file.rb'
   s.require_paths = %w[lib]
 
-  s.executables = ["unixoid-challenge"]
+  s.executables = ["unixoid-challenge", "unixoid-debug"]
 end
