@@ -19,8 +19,8 @@ module Unixoid
       line = Cocaine::CommandLine.new(command, "", { expected_outcodes: [0, 1], swallow_stderr: true } )
       begin
         log(:info, line.run)
-      rescue Cocaine::ExitStatusError => e
-        log(:error, e.message)
+      rescue Cocaine::ExitStatusError => error
+        log(:error, error.message)
       end
     end
 
