@@ -4,8 +4,6 @@ module Unixoid
 
   describe Runner do
 
-    subject { Runner.new }
-
     let(:command) { 'echo hello world' }
     let(:error_command) { 'rspec foo' }
 
@@ -41,7 +39,7 @@ module Unixoid
       
       it 'logs errors' do
         subject.run(error_command)
-        expect(File.read(logfile)).to match(/ERROR/)
+        expect(File.read(logfile)).to match(/alksjdf/)
       end
     end
   end
