@@ -14,10 +14,6 @@ module Unixoid
       @runner = Runner.new
     end
 
-    def self.submit(file, github)
-      new(github).submit(file)
-    end
-
     def submit(file)
       create_repo
       add(file)
@@ -49,6 +45,15 @@ module Unixoid
 
     def remove_remote
       run('git remote rm origin')
+    end
+
+    def configured?
+      run('git config --get user.email') != '' && run('git config --get user.name') != ''
+    end
+    
+    def configure(name, email)
+      run("git config --global user.name '#{name}'")
+      run("git config --global user.email '#{email}'")
     end
 
     private
