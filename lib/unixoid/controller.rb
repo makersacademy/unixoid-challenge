@@ -43,7 +43,7 @@ module Unixoid
         puts render_results(results)
       end
 
-      def get_config
+      def get_config(git)
         puts 'Please enter your full name:'
         name = gets.chomp        
         puts 'Please enter your e-mail address:'
