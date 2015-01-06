@@ -21,8 +21,12 @@ module Unixoid
       def push_to_github(file)
         github = Github.create_repo
         auth_fail! unless github.authenticated?
+
+        git = Git.new(github)
+        get_config(git) unless git.configured?
+
         puts "Submitting..."
-        Git.submit(file, github)
+        git.submit(file)
         puts "Submitted!"
       end
 
@@ -37,6 +41,14 @@ module Unixoid
 
       def final_result(results)
         puts render_results(results)
+      end
+
+      def get_config
+        puts 'Please enter your full name:'
+        name = gets.chomp        
+        puts 'Please enter your e-mail address:'
+        email = gets.chomp
+        git.configure(name, email)
       end
 
       def auth_fail!
