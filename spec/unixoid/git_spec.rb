@@ -81,25 +81,25 @@ module Unixoid
     context 'checking local config' do
 
       it 'flags when they have no email defined' do
-        expect(runner).to receive(:run).with('git config --get user.email').and_return('')
+        expect(runner).to receive(:run).with('git config --get user.email', outcodes: [0, 1]).and_return('')
         expect(subject).not_to be_configured 
       end
 
       it 'flags when they have no name defined' do
-        expect(runner).to receive(:run).with('git config --get user.name').and_return('')
+        expect(runner).to receive(:run).with('git config --get user.name', outcodes: [0, 1]).and_return('')
         expect(subject).not_to be_configured 
       end
 
       it 'shows when they have their config set up properly' do
-        expect(runner).to receive(:run).with('git config --get user.email').and_return('spike@makersacademy.com')
-        expect(runner).to receive(:run).with('git config --get user.name').and_return('Spike Lindsey')
+        expect(runner).to receive(:run).with('git config --get user.email', outcodes: [0, 1]).and_return('spike@makersacademy.com')
+        expect(runner).to receive(:run).with('git config --get user.name', outcodes: [0, 1]).and_return('Spike Lindsey')
         expect(subject).to be_configured 
       end
 
       it 'configures Git' do
         subject.configure('Spike Lindsey', 'spike@makersacademy.com')
-        expect_to_have_run("git config --global user.email 'spike@makersacademy.com'")
         expect_to_have_run("git config --global user.name 'Spike Lindsey'")
+        expect_to_have_run("git config --global user.email 'spike@makersacademy.com'")
       end
     end
   end

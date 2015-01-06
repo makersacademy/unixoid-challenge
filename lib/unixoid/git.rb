@@ -48,7 +48,7 @@ module Unixoid
     end
 
     def configured?
-      run('git config --get user.email') != '' && run('git config --get user.name') != ''
+      run('git config --get user.email', outcodes: [0, 1]) != '' && run('git config --get user.name', outcodes: [0, 1]) != ''
     end
     
     def configure(name, email)
