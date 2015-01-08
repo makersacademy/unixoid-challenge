@@ -8,20 +8,25 @@ module Unixoid
 
     before do
       allow(File).to receive(:join).and_return('challenge_spec.rb')
-      allow(runner).to receive(:run).and_return('results')
+      allow(runner).to receive(:run).and_return("results\n errors")
     end
 
     describe 'Running specs' do
 
-      let(:command) { 'rspec --out unixoid_results.txt -fp challenge_spec.rb' }
+      let(:command) { 'rspec -fp challenge_spec.rb' }
 
-      it 'runs the challenge spec and outputs to a file' do
+      it 'runs the challenge spec' do
         subject.run_specs
         expect(runner).to have_received(:run).with(command, anything)
       end
 
+      it 'outputs the first line to a file' do
+        expect(File).to receive(:write).with('unixoid_results.txt', "results\n")
+        subject.run_specs 
+      end
+
       it 'provides the result' do
-        expect(subject.run_specs).to eq('results')
+        expect(subject.run_specs).to eq("results\n")
       end
 
       context 'when the test fails' do

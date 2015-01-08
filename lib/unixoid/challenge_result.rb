@@ -35,7 +35,7 @@ class ChallengeResult
   end
   
   def parse(challenge)
-    challenge.split("\n").first.chars
+    challenge.chomp("\n").chars
   end
 
   def passes

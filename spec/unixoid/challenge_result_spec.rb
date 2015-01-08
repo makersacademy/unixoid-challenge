@@ -6,7 +6,7 @@ describe ChallengeResult do
 
   context 'when all tests pass' do
 
-    let(:challenge) { ".......................\n\nFinished in" }
+    let(:challenge) { ".......................\n" }
 
     it 'indicates that the challenge was completed' do
       expect(subject.status).to eq(:complete)
@@ -16,7 +16,7 @@ describe ChallengeResult do
 
   context 'when some tests pass' do
 
-    let(:challenge) { "FFF.FFFF.F\n\nFailures" }
+    let(:challenge) { "FFF.FFFF.F\n" }
 
     it 'indicates that the challenge was not completed' do
       expect(subject.status).to eq(:attempted)
@@ -29,7 +29,7 @@ describe ChallengeResult do
 
   context 'when no tests pass' do
     
-    let(:challenge) { "FFFFFFFF\n\nFailures" }
+    let(:challenge) { "FFFFFFFF\n" }
 
     it 'indicates that the challenge has not been attempted' do
       expect(subject.status).to eq(:unattempted)

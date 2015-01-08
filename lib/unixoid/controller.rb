@@ -3,9 +3,9 @@ module Unixoid
 
     def self.run
       results = run_challenge
-      final_result(results)
       puts "Submitting your results to Makers Academy..."
       push_to_github(Challenge::RESULTS_FILE)
+      final_result(results)
     end
 
     def self.debug
