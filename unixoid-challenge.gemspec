@@ -1,6 +1,9 @@
+$LOAD_PATH.push File.expand_path("../lib", __FILE__)
+require 'unixoid/version'
+
 Gem::Specification.new do |s|
   s.name        = 'unixoid-challenge'
-  s.version     = '0.0.4'
+  s.version     = Unixoid::VERSION.dup 
   s.licenses    = ['MIT']
   s.date        = '2014-10-13'
   s.summary     = "Test your command line skills!"
