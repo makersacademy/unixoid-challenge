@@ -32,12 +32,8 @@ describe "Unixoid test" do
     expect(File.read("#{Dir.home}/.bash_profile")).to match(/export\s+TESTING_MAKERS=working/)
   end
 
-  it "8a. should have t-vars.count in my/public/files" do
+  it "8. should have t-vars.count in my/public/files with an overall count" do
     expect(File.exist?('my/public/files/t-vars.count')).to be true
-    lines = File.readlines('my/public/files/t-vars.count')
-  end
-
-  it "8b. should have the count of env vars in my/public/files/t-vars.count" do
     expect(File.read('my/public/files/t-vars.count')).to match(/^Overall count:\s+\d+\s*$/i)
   end
 
@@ -60,19 +56,11 @@ describe "Unixoid test" do
     expect(t_vars_permissions & 0666).to eq(0666)    
   end
 
-  it "12a. should have text-files-count.txt in my/public/files" do
-    expect(File.exist?('my/public/files/text-files-count.txt')).to be true
-  end
-  
-  it "12b. should have the count of text files in my/public/files/text-files-count.txt" do
+  it "12. should have the count of text files in my/public/files/text-files-count.txt" do
     expect(File.read('my/public/files/text-files-count.txt')).to match(/^\s*\d{2,6}\s*$/)
   end
 
-  it "13a. should have first-three-env.txt in my/private/files" do
-    expect(File.exist?('my/private/files/first-three-env.txt')).to be true
-  end
-  
-  it "13b. should have the the first three env vars in my/private/files/first-three-env.txt" do
+  it "13. should have the the first three env vars in my/private/files/first-three-env.txt" do
     lines = File.readlines('my/private/files/first-three-env.txt')
     expect(lines.sort).to eq lines
     expect(lines.count).to eq(3)
@@ -81,5 +69,4 @@ describe "Unixoid test" do
   it "14. should have commands.txt in my/private/files" do
     expect(File.exist?('my/private/files/commands.txt')).to be true
   end
-  
 end

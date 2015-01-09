@@ -13,7 +13,7 @@ module Unixoid
 
     def self.run(command, opts = {})
       new.run(command, opts)
-    end    
+    end
 
     def run(command, outcodes: [0])
       line = Cocaine::CommandLine.new(command, "", expected_outcodes: outcodes, swallow_stderr: true)
