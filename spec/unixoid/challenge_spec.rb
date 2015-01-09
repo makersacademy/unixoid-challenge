@@ -13,7 +13,7 @@ module Unixoid
 
     describe 'Running specs' do
 
-      let(:command) { 'rspec -fp challenge_spec.rb' }
+      let(:command) { 'rspec --order defined -fp challenge_spec.rb' }
 
       it 'runs the challenge spec' do
         subject.run_specs
