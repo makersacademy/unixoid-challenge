@@ -1,3 +1,5 @@
+require 'cocaine'
+
 describe "Unixoid test" do
 
   it "1. should have a my/private/files directory" do
@@ -61,8 +63,9 @@ describe "Unixoid test" do
   end
 
   it "13. should have the the first three env vars in my/private/files/first-three-env.txt" do
-    lines = File.readlines('my/private/files/first-three-env.txt')
-    expect(lines.sort).to eq lines
+    lines = File.readlines('my/private/files/first-three-env.txt').map(&:chomp)
+    command = Cocaine::CommandLine.new("echo \"#{lines.join("\n")}\" | sort", "", expected_outcodes: [0, 2], swallow_stderr: true).run.sub(/^\n+/, "").split("\n")
+    expect(command).to eq lines
     expect(lines.count).to eq(3)
   end
 
