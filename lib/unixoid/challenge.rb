@@ -8,7 +8,7 @@ module Unixoid
     end
 
     def run_specs
-      results = Runner.run("rspec -fp #{spec_file}", outcodes: [0,1]).lines.first
+      results = Runner.run("rspec --order defined -fp #{spec_file}", outcodes: [0,1]).lines.first
       File.write("#{RESULTS_FILE}", results)
       results
     end
