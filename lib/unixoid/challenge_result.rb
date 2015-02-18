@@ -1,9 +1,9 @@
 class ChallengeResult
-  
+
   STATUSES = [:complete, :attempted, :unattempted]
 
   PASS_CHAR = '.'
-  
+
   def initialize(challenge)
     @result = parse(challenge)
   end
@@ -13,13 +13,13 @@ class ChallengeResult
       send("#{status}?")
     end
   end
-  
+
   def failures
     failing_test_numbers.compact
   end
 
   private
-  
+
   attr_reader :result
 
   def complete?
@@ -33,7 +33,7 @@ class ChallengeResult
   def unattempted?
     passes.empty?
   end
-  
+
   def parse(challenge)
     challenge.chomp("\n").chars
   end

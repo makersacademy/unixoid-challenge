@@ -52,7 +52,7 @@ module Unixoid
       end
 
       def auth_fail!
-        puts 'Incorrect login details. Please run unixoid-challenge again'.red 
+        puts 'Incorrect login details. Please run unixoid-challenge again'.red
         exit 1
       end
 
