@@ -5,7 +5,8 @@ module Unixoid
   describe Git do
 
     let(:github) { double 'github', username: 'spike01', password: password }
-    let(:password) { 'pass' }
+    let(:remote_params) { {username: 'spike01', password: password} }
+    let(:password) { 'hustla$$$' }
 
     subject { Git.new(github) }
 
@@ -14,9 +15,12 @@ module Unixoid
     let(:create_command) { 'git init' }
     let(:add_command) { 'git add unixoid_results.txt' }
     let(:commit_command) { "git commit -m 'Unixoid submission'" }
-    let(:remote_command) { "git remote add origin https://spike01:pass@github.com/spike01/unixoid_submission.git" }
+    let(:remote_command) { "git remote add origin https://:username::password@github.com/:username/unixoid_submission.git" }
     let(:push_command) { 'git push --force -u origin master' }
     let(:remove_command) { 'git remote rm origin' }
+    let(:configure_name_command) { 'git config --global user.name :name' }
+    let(:configure_email_command) { 'git config --global user.email :email' }
+
     let(:file) { 'unixoid_results.txt' }
 
     context 'running commands' do
@@ -38,21 +42,19 @@ module Unixoid
 
       it 'adds remote' do
         subject.add_remote
-        expect_to_have_run(remote_command)
+        expect(runner).to have_received(:run).with(remote_command, params: remote_params)
       end
-
     end
 
     context 'when adding a remote and a user enters input with special characters' do
 
-      let(:remote_command) { "git remote add origin https://spike01:pass%20word@github.com/spike01/unixoid_submission.git" }
+      let(:remote_params) { {username: 'spike01', password: 'pass%20word'} }
       let(:password) { 'pass word' }
 
       it 'URI encodes the user credentials' do
         subject.add_remote
-        expect_to_have_run(remote_command)
+        expect(runner).to have_received(:run).with(remote_command, params: remote_params)
       end
-
     end
 
     it 'force pushes results file' do
@@ -68,13 +70,14 @@ module Unixoid
 
     context 'submitting results' do
 
-      let(:commands) { [create_command, add_command, commit_command, remote_command, push_command, remove_command] }
+      let(:commands) { [create_command, add_command, commit_command, push_command, remove_command] }
 
       it 'adds, commits and pushes in one go' do
         subject.submit(file)
         commands.each do |command| 
           expect_to_have_run(command)
         end
+        expect(runner).to have_received(:run).with(remote_command, params: remote_params)
       end
     end
 
@@ -98,13 +101,13 @@ module Unixoid
 
       it 'configures Git' do
         subject.configure('Spike Lindsey', 'spike@makersacademy.com')
-        expect_to_have_run("git config --global user.name 'Spike Lindsey'")
-        expect_to_have_run("git config --global user.email 'spike@makersacademy.com'")
+        expect(runner).to have_received(:run).with(configure_name_command, params: {name: 'Spike Lindsey'})
+        expect(runner).to have_received(:run).with(configure_email_command, params: {email: 'spike@makersacademy.com'})
       end
     end
   end
 end
 
 def expect_to_have_run(command)
-  expect(runner).to have_received(:run).with(command)
+  expect(runner).to have_received(:run).with(command).ordered
 end

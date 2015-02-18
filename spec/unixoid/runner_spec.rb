@@ -11,6 +11,15 @@ module Unixoid
       expect(subject.run(command)).to match(/hello world/)
     end
 
+    context 'with interpolated arguments' do
+
+      let(:args) { { argument: 'hello 99%' } }
+
+      it 'escapes the passed in arguments' do
+        expect(subject.run('echo :argument', params: args)).to match(/hello 99%/)
+      end
+    end
+
     it 'does not output anything to stdout' do
       expect { subject.run(command) }.to_not output.to_stdout
     end

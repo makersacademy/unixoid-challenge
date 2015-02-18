@@ -8,7 +8,7 @@ module Unixoid
     extend Forwardable
 
     delegate run: :@runner
-    
+
     def initialize(github)
       @github = github
       @runner = Runner.new
@@ -24,7 +24,7 @@ module Unixoid
     end
 
     def create_repo
-      run('git init')      
+      run('git init')
     end
 
     def add(file)
@@ -36,7 +36,7 @@ module Unixoid
     end
 
     def add_remote
-      run("git remote add origin https://#{username}:#{password}@github.com/#{username}/unixoid_submission.git")
+      run("git remote add origin https://:username::password@github.com/:username/unixoid_submission.git", params: {username: username, password: password})
     end
 
     def push_results
@@ -50,11 +50,12 @@ module Unixoid
     def configured?
       run('git config --get user.email', outcodes: [0, 1]) != '' && run('git config --get user.name', outcodes: [0, 1]) != ''
     end
-    
+
     def configure(name, email)
-      run("git config --global user.name '#{name}'")
-      run("git config --global user.email '#{email}'")
+      run("git config --global user.name :name", params: {name: name})
+      run("git config --global user.email :email", params: {email: email})
     end
+
 
     private
 

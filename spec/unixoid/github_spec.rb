@@ -63,13 +63,6 @@ module Unixoid
         end
       end
 
-      context 'when the user has not configured local Git' do
-
-        it 'asks for their e-mail' do
-
-        end
-      end
-
       after do
         $stdin = STDIN
       end
