@@ -1,6 +1,6 @@
 module Unixoid
   class Challenge
-    
+
     RESULTS_FILE = 'unixoid_results.txt'
 
     def self.run_specs
@@ -17,6 +17,6 @@ module Unixoid
 
     def spec_file
       File.join(File.dirname(__FILE__), '..', '..','challenge_spec.rb')
-    end    
+    end
   end
 end

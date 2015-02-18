@@ -12,7 +12,7 @@ module Unixoid
     end
 
     def self.run(command, params: {}, outcodes: {})
-      new.run(command, params, outcodes)
+      new.run(command, params: params, outcodes: outcodes)
     end
 
     def run(command, params: {}, outcodes: [0])
