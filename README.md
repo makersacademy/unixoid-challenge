@@ -25,6 +25,26 @@ Then change into that directory using this next command:
 cd temp
 ```
 
+Checking and submitting your progress
+-------------------------------------
+
+First, you will need to install the `unixoid-challenge` gem, like this:
+
+```sh
+gem install unixoid-challenge
+```
+
+At any point while going through the challenge you can check your progress by running:
+
+```sh
+unixoid-challenge
+```
+
+We recommend running this after each task to make sure you're on the right track.
+__(make sure you are in the temp directory when you run "unixoid-challenge")__
+
+This will tell you if you've completed the task, or which of the tasks above you still need to complete. It will also submit your results to GitHub (you'll need your username and password that you use to login to GitHub) so we can track your progress.
+
 Now use your command line skills to complete the following:
 
 1. Using one command, create a directory structure "my/private/files"
@@ -42,21 +62,4 @@ Now use your command line skills to complete the following:
 13. Create another file my/private/files/first-three-env.txt and output the first three env variables from a list of all of them sorted alphabetically
 14. Create another file my/private/files/commands.txt and output the contents of the `history` command to that file
 
-Checking and submitting your progress
--------------------------------------
 
-First, you will need to install the `unixoid-challenge` gem, like this:
-
-```sh
-gem install unixoid-challenge
-```
-
-At any point while going through the challenge you can check your progress by running:
-
-```sh
-unixoid-challenge
-```
-
-__(make sure you are in the same directory that you completed the challenge in)__
-
-This will tell you if you've completed the task, or which of the tasks above you still need to complete. It will also submit your results to GitHub (you'll need your username and password that you use to login to GitHub) so we can track your progress.
