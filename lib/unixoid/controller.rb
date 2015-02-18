@@ -45,7 +45,7 @@ module Unixoid
 
       def get_config(git)
         puts 'Please enter your full name:'
-        name = gets.chomp        
+        name = gets.chomp
         puts 'Please enter your e-mail address:'
         email = gets.chomp
         git.configure(name, email)

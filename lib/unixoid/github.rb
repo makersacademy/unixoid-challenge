@@ -4,7 +4,7 @@ require 'json'
 module Unixoid
 
   class Github
-    
+
     GITHUB_URL = 'https://api.github.com/user/repos'
     REPO_NAME = 'unixoid_submission'
 
@@ -17,7 +17,7 @@ module Unixoid
     end
 
     def create_repo
-      parse @runner.run(command)
+      parse @runner.run(command, params: {username: username, password: password})
       self
     end
 
@@ -28,7 +28,7 @@ module Unixoid
     def password
       @password ||= ask_for_password
     end
-    
+
     def authenticated?
       @response && @response['message'] != "Bad credentials"
     end
@@ -36,7 +36,7 @@ module Unixoid
     private
 
     def command
-      %Q{curl -u "#{username}:#{password}" #{GITHUB_URL} -d '{"name": "#{REPO_NAME}"}'}
+      %Q{curl -u ":username::password" #{GITHUB_URL} -d '{"name": "#{REPO_NAME}"}'}
     end
  
     def parse(response)

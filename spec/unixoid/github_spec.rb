@@ -7,14 +7,15 @@ module Unixoid
     describe "Creating a remote repo" do
 
       let(:stdin) { spy('io') }
-      let!(:runner) { class_spy('Unixoid::Runner').as_stubbed_const }      
+      let!(:runner) { class_spy('Unixoid::Runner').as_stubbed_const }
 
       let(:message) { "Please enter your Github username:\n" }
 
-      let(:command) { %Q{curl -u "spike01:pass" #{github_command}} }
+      let(:command) { %Q{curl -u ":username::password" #{github_command}} }
       let(:url) { Github::GITHUB_URL }
       let(:repo) { Github::REPO_NAME }
       let(:github_command) { %Q{#{url} -d '{"name": "#{repo}"}'} }
+      let(:auth_params) { {username: 'spike01', password: 'pa$$'} }
 
       before do
         mock_gets
@@ -30,7 +31,7 @@ module Unixoid
 
         it "stores user's github password" do
           subject.create_repo
-          expect(subject.password).to eq('pass')
+          expect(subject.password).to eq('pa$$')
         end
       end
 
@@ -41,7 +42,7 @@ module Unixoid
 
       it 'creates a repo on Github' do
         subject.create_repo
-        expect(runner).to have_received(:run).with(command)
+        expect(runner).to have_received(:run).with(command, params: auth_params)
       end
 
       it 'authenticates' do
@@ -75,7 +76,7 @@ module Unixoid
     def mock_gets
       $stdin = stdin
       allow(stdin).to receive(:gets).and_return('spike01')
-      allow(stdin).to receive(:noecho).and_return('pass')
+      allow(stdin).to receive(:noecho).and_return('pa$$')
     end
   end
 end
