@@ -36,7 +36,7 @@ module Unixoid
     private
 
     def command
-      %Q{curl -u ":username::password" #{GITHUB_URL} -d '{"name": "#{REPO_NAME}"}'}
+      %Q{curl -u :username::password #{GITHUB_URL} -d '{"name": "#{REPO_NAME}"}'}
     end
 
     def parse(response)
