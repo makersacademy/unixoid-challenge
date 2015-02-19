@@ -5,7 +5,7 @@ module Unixoid
   describe Git do
 
     let(:github) { double 'github', username: 'spike01', password: password }
-    let(:remote_params) { {username: 'spike01', password: password} }
+    let(:remote_params) { {username: 'spike01', password: 'hustla%24%24%24'} }
     let(:password) { 'hustla$$$' }
 
     subject { Git.new(github) }
@@ -48,8 +48,8 @@ module Unixoid
 
     context 'when adding a remote and a user enters input with special characters' do
 
-      let(:remote_params) { {username: 'spike01', password: 'pass%20word'} }
-      let(:password) { 'pass word' }
+      let(:remote_params) { {username: 'spike01', password: 'pass+word%26'} }
+      let(:password) { 'pass word&' }
 
       it 'URI encodes the user credentials' do
         subject.add_remote

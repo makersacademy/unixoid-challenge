@@ -1,5 +1,5 @@
 require 'forwardable'
-require 'uri'
+require 'cgi'
 
 module Unixoid
 
@@ -60,11 +60,11 @@ module Unixoid
     private
 
     def username
-      URI.encode(@github.username)
+      CGI.escape(@github.username)
     end
 
     def password
-      URI.encode(@github.password)
+      CGI.escape(@github.password)
     end
   end
 end
