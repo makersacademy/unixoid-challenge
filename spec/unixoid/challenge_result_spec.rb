@@ -28,12 +28,11 @@ describe ChallengeResult do
   end
 
   context 'when no tests pass' do
-    
+
     let(:challenge) { "FFFFFFFF\n" }
 
     it 'indicates that the challenge has not been attempted' do
       expect(subject.status).to eq(:unattempted)
     end
-
   end
 end

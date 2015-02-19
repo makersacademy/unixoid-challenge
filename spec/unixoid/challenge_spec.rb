@@ -38,7 +38,7 @@ module Unixoid
           expect(runner).to have_received(:run).with(command, opts)
         end
       end
-    end  
+    end
   end
 end
 

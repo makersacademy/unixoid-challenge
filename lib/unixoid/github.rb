@@ -38,7 +38,7 @@ module Unixoid
     def command
       %Q{curl -u ":username::password" #{GITHUB_URL} -d '{"name": "#{REPO_NAME}"}'}
     end
- 
+
     def parse(response)
       @response = parse_json(response)
     end
@@ -53,7 +53,7 @@ module Unixoid
       puts "Please enter your Github username:"
       $stdin.gets.chomp
     end
-  
+
     def ask_for_password
       puts "Please enter your Github password:"
       $stdin.noecho(&:gets).chomp
