@@ -1,3 +1,5 @@
+[![Gem Version](https://badge.fury.io/rb/unixoid-challenge.svg)](http://badge.fury.io/rb/unixoid-challenge)
+
 Unixoid Challenge
 =================
 
