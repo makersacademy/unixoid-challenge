@@ -28,7 +28,7 @@ Then change into that directory using this next command:
 cd temp
 ```
 
-Checking and submitting your progress
+Checking and submitting your progress:
 -------------------------------------
 
 First, you will need to install the `unixoid-challenge` gem, like this:
@@ -48,6 +48,8 @@ __(make sure you are in the temp directory when you run "unixoid-challenge")__
 
 This will tell you if you've completed the task, or which of the tasks above you still need to complete. It will also submit your results to GitHub (you'll need your username and password that you use to login to GitHub) so we can track your progress.
 
+The Challenge:
+--------------
 Now use your command line skills to complete the following:
 
 1. Using one command, create a directory structure "my/private/files"
