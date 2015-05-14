@@ -8,6 +8,7 @@ Instructions
 
 * Test time: 1 hour (you can take longer, don’t worry)
 * You will need to have [RVM](https://github.com/makersacademy/pre_course/blob/master/pills/installing_rvm.md) configured if you're using a mac and be using a version of Ruby that is not the default (Note: if you are using Nitrous then you do not need to install Ruby - it's already there for you). 
+* Your Ruby version needs to be 2.1.x or higher (```ruby -v``` to check what you're on)
 * Feel free to use google, your notes, books, etc. but work on your own
 * Obviously don't use Sublime Text, Finder or similar tools – only the command-line
 * You'll almost certainly need to Google some things. This is deliberate.
