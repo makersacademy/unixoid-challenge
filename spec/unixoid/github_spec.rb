@@ -60,7 +60,7 @@ module Unixoid
 
         it 'does not fail silently' do
           subject.create_repo
-          expect(subject).to_not be_authenticated 
+          expect(subject).to_not be_authenticated
         end
       end
 

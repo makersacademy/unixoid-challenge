@@ -23,6 +23,7 @@ module Unixoid
         auth_fail! unless github.authenticated?
 
         git = Git.new(github)
+        git_fail! unless git.installed?
         get_config(git) unless git.configured?
 
         puts "Submitting..."
@@ -49,6 +50,11 @@ module Unixoid
         puts 'Please enter your e-mail address:'
         email = gets.chomp
         git.configure(name, email)
+      end
+
+      def git_fail!
+        puts 'Git is not installed - please follow the instructions at https://help.github.com/articles/set-up-git and then try again'.red
+        exit 1
       end
 
       def auth_fail!

@@ -3,7 +3,7 @@ require 'unixoid/version'
 
 Gem::Specification.new do |s|
   s.name        = 'unixoid-challenge'
-  s.version     = Unixoid::VERSION.dup 
+  s.version     = Unixoid::VERSION.dup
   s.licenses    = ['MIT']
   s.date        = '2014-10-13'
   s.summary     = "Test your command line skills!"

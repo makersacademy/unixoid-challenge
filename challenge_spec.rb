@@ -16,12 +16,12 @@ describe "Unixoid test" do
 
   it "4. should have 'List of env vars that begin with T' on first line of t-vars.env" do
     lines = File.readlines('my/private/files/t-vars.env')
-    expect(lines.shift).to match(/^List of env vars that begin with T$/i)    
+    expect(lines.shift).to match(/^List of env vars that begin with T$/i)
   end
 
   it "5. should have the list of env vars that begin with T in t-vars.env" do
     lines = File.readlines('my/private/files/t-vars.env')
-    lines.shift if lines.first =~ /^List of env vars that begin with T$/i    
+    lines.shift if lines.first =~ /^List of env vars that begin with T$/i
     lines.shift if lines.first == "\n"
     expect(lines.map{|l| l[0]}.uniq).to eq(['T'])
   end
@@ -41,7 +41,7 @@ describe "Unixoid test" do
 
   it "9. should have rw access for the owner only on my/private/files/t-vars.env" do
     file = "my/private/files/t-vars.env"
-    permissions = File.stat(file).mode  
+    permissions = File.stat(file).mode
     expect(permissions).to eq(0100600) # rw for the user only
   end
 
@@ -54,8 +54,8 @@ describe "Unixoid test" do
   end
 
   it "11. should have rw permissions for all users on my/public/files/t-vars.count" do
-    t_vars_permissions = File.stat('my/public/files/t-vars.count').mode    
-    expect(t_vars_permissions & 0666).to eq(0666)    
+    t_vars_permissions = File.stat('my/public/files/t-vars.count').mode
+    expect(t_vars_permissions & 0666).to eq(0666)
   end
 
   it "12. should have the count of text files in my/public/files/text-files-count.txt" do
