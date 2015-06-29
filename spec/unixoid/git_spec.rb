@@ -84,12 +84,12 @@ module Unixoid
     context 'checking for git installation' do
 
         it 'flags when git is not installed' do
-          expect(runner).to receive(:run).with('which git').and_return('git not found')
+          expect(runner).to receive(:run).with('which git', outcodes: [0, 1]).and_return('')
           expect(subject).not_to be_installed
         end
 
         it 'shows when git is installed' do
-          expect(runner).to receive(:run).with('which git').and_return('/usr/local/bin/git')
+          expect(runner).to receive(:run).with('which git', outcodes: [0,1]).and_return("/usr/local/bin/git\n")
           expect(subject).to be_installed
         end
     end

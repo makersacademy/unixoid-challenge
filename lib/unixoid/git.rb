@@ -48,7 +48,7 @@ module Unixoid
     end
 
     def installed?
-      run('which git') != 'git not found'
+      run('which git', outcodes: [0, 1]) != ''
     end
 
     def configured?
