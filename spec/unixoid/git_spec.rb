@@ -74,29 +74,42 @@ module Unixoid
 
       it 'adds, commits and pushes in one go' do
         subject.submit(file)
-        commands.each do |command| 
+        commands.each do |command|
           expect_to_have_run(command)
         end
         expect(runner).to have_received(:run).with(remote_command, params: remote_params)
       end
     end
 
+    context 'checking for git installation' do
+
+        it 'flags when git is not installed' do
+          expect(runner).to receive(:run).with('which git', outcodes: [0, 1]).and_return('')
+          expect(subject).not_to be_installed
+        end
+
+        it 'shows when git is installed' do
+          expect(runner).to receive(:run).with('which git', outcodes: [0,1]).and_return("/usr/local/bin/git\n")
+          expect(subject).to be_installed
+        end
+    end
+
     context 'checking local config' do
 
       it 'flags when they have no email defined' do
         expect(runner).to receive(:run).with('git config --get user.email', outcodes: [0, 1]).and_return('')
-        expect(subject).not_to be_configured 
+        expect(subject).not_to be_configured
       end
 
       it 'flags when they have no name defined' do
         expect(runner).to receive(:run).with('git config --get user.name', outcodes: [0, 1]).and_return('')
-        expect(subject).not_to be_configured 
+        expect(subject).not_to be_configured
       end
 
       it 'shows when they have their config set up properly' do
         expect(runner).to receive(:run).with('git config --get user.email', outcodes: [0, 1]).and_return('spike@makersacademy.com')
         expect(runner).to receive(:run).with('git config --get user.name', outcodes: [0, 1]).and_return('Spike Lindsey')
-        expect(subject).to be_configured 
+        expect(subject).to be_configured
       end
 
       it 'configures Git' do

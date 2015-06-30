@@ -47,6 +47,10 @@ module Unixoid
       run('git remote rm origin')
     end
 
+    def installed?
+      run('which git', outcodes: [0, 1]) != ''
+    end
+
     def configured?
       run('git config --get user.email', outcodes: [0, 1]) != '' && run('git config --get user.name', outcodes: [0, 1]) != ''
     end

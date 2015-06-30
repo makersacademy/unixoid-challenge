@@ -22,7 +22,7 @@ module Unixoid
 
       it 'outputs the first line to a file' do
         expect(File).to receive(:write).with('unixoid_results.txt', "results\n")
-        subject.run_specs 
+        subject.run_specs
       end
 
       it 'provides the result' do
